@@ -79,9 +79,9 @@ fi
 echo ""
 echo ""
 echo ""
-echo "**************************************************"
-echo "*** Building RASPBERRYPI-UA-NETINST image ********"
-echo "**************************************************"
+echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+echo "@@@ Building RASPBERRYPI-UA-NETINST image @@@@@@@@"
+echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 echo ""
 pushd $netinst/
   # change the hostname in the default installer-config.txt
