@@ -1,21 +1,85 @@
-# Useful OS extensions
-packages="apt-utils,logrotate,raspi-copies-and-fills,rsync,lsb-release,nfs-common,f2fs-tools"
+# These are my default settings.
+# The order of the settings follows (as closely as possible) the description in
+# the **INSTALL_CUSTOM.md** documentation of rapsberrypi-ua-netinst repo.
 
-# Handy utilities
-packages="$packages,bc,dieharder,git,htop,lsof,nano,psmisc,screen,stress,tree,curl,zip"
 
-# My defaults
-cmdline="dwc_otg.lpm_enable=0 console=tty1 noatime loglevel=2 cgroup_enable=memory elevator=noop"
+# >>> PACKAGES <<<
+##################################
+
+packages="rsync,lsb-release,nfs-common,f2fs-tools,git,nano,tree,curl,zip"
+# packages I need
+packages="$packages,bc,htop,lsof,psmisc,screen,stress"
+# packages I like
+
+firmware_packages=1
+# install the firmware packages just-in-case I need them for a WiFi-dongle
+
+
+# >>> Device / Peripheral <<<
+##################################
+
+
+# >>> SSH <<<
+##################################
+
+ssh_pwlogin=1
+# the following is a deprecated option:
 disable_root=1
-gpu_mem=16
-hostname=raspberrypi
-rootfstype=f2fs
-timeserver=2.pool.ntp.org
-timezone=Europe/Amsterdam
+root_ssh_pwlogin=0
+# for security reasons we don't enable root, but we do enable SSH logins
+
+
+# >>> User <<<
+##################################
+
 username=pi
 userpw=raspberry
+usergpu=1
+usergpio=1
+usersysgroups="adm,users,video,dialout"
 user_is_admin=1
+# set-up the default user
+
+
+# >>> Network <<<
+##################################
+
+hostname=raspberrypi
+# This is a placeholder name. It will be replaced by the mod-raspberrypi-ua-netinst script.
+domainname=lan
+# this is my default local domainname
+
+
+# >>> Localisation <<<
+##################################
+
+timezone=Europe/Amsterdam
 locales="en_US.UTF-8"
 system_default_locale="en_US.UTF-8"
 
+
+# >>> Graphics/GPU
+##################################
+
+gpu_mem=16
+# a headless-server does not need a lot of GPU memory. Lowest possible selected.
+
+
+# >>> Partitioning/Filesystem <<<
+##################################
+
+rootfstype=f2fs
+# F2FS is better suited for use on SD
 boot_volume_label=$hostname
+
+
+# >>> Advanced <<<
+##################################
+
+cmdline="dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 noatime loglevel=6 cgroup_enable=memory elevator=noop fsck.repair=yes"
+# `noatime` added to reduce wear on SD-card
+# `loglevel=6` to increase logging during boot
+# `cgroup_enable=memory` added to enable notification of upcoming OOM events
+# elevator changed to `noop` to increase performance
+
+timeserver=nl.pool.ntp.org

@@ -10,7 +10,6 @@
 # This is where we setup variables and stuff that we need later in the script
 
 USER=$username
-XTRA_GRPS="adm,users,video,dialout"
 USRHOME="home/"$USER
 RMTPATH=$hostname/$USRHOME
 
@@ -88,10 +87,6 @@ fi
 ####################
 
 # Here we setup the generic user `pi` and the luser environment.
-
-echo -n "Modify user  : "$USER
-chroot /rootfs /usr/sbin/usermod -a -G $XTRA_GRPS $USER
-echo " "
 
 echo "Set-up sudo..."
 echo -n "$USER ALL = (ALL) NOPASSWD: ALL" > "/rootfs/etc/sudoers.d/$USER"
