@@ -44,8 +44,6 @@ echo "Wi-fi : $WIFI"
 echo "Name  : $CLIENT"
 echo "Branch: $branch"
 echo ""
-echo ""
-echo ""
 
 echo ""
 echo ""
@@ -53,10 +51,8 @@ echo ""
 echo "**************************************************"
 echo "*** Updating the RASPBERRYPI-UA-NETINST files ****"
 echo "**************************************************"
+echo ""
 pushd $netinst/
-  echo ""
-  echo ""
-  echo ""
   git pull
   git fetch origin
   git checkout "$branch"
@@ -70,8 +66,6 @@ echo ""
 echo "**************************************************"
 echo "*** Putting modifications in place ***************"
 echo "**************************************************"
-echo ""
-echo ""
 echo ""
 cp -rv ./overlay/* $netinst/
 if [ "$WIFI" == true ]; then
@@ -89,19 +83,15 @@ echo "**************************************************"
 echo "*** Building RASPBERRYPI-UA-NETINST image ********"
 echo "**************************************************"
 echo ""
-echo ""
-echo ""
 pushd $netinst/
   # change the hostname in the default installer-config.txt
-  sed -i "s/raspberrypi/${CLIENT}/" ./installer-config.txt
+  sed -i "s/raspberrypi/${CLIENT}/" ./config/installer-config.txt
   echo ""
   echo ""
   echo ""
   echo "**************************************************"
   echo "*** Cleaning the installer ***********************"
   echo "**************************************************"
-  echo ""
-  echo ""
   echo ""
   ./clean.sh
 
@@ -112,8 +102,6 @@ pushd $netinst/
   echo "*** Updating the installer packages **************"
   echo "**************************************************"
   echo ""
-  echo ""
-  echo ""
   ./update.sh
 
   echo ""
@@ -122,8 +110,6 @@ pushd $netinst/
   echo "**************************************************"
   echo "*** Building the installer ***********************"
   echo "**************************************************"
-  echo ""
-  echo ""
   echo ""
   # We don't need the zip file
   sed -i 's/cd bootfs && zip/#not zipping#/' ./build.sh
