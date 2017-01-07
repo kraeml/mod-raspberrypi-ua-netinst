@@ -67,12 +67,12 @@ echo "**************************************************"
 echo "*** Putting modifications in place ***************"
 echo "**************************************************"
 echo ""
-cp -rv ./overlay/* $netinst/
+cp -rv ./overlay/* $netinst/raspberrypi-ua-netinst/
 if [ "$WIFI" == true ]; then
   echo "   ...adding wpa_supplicant.conf to installer!"
-  echo "ifname=wlan0"           >> $netinst/config/installer-config.txt
-  echo "drivers_to_load=8192cu" >> $netinst/config/installer-config.txt
-  cp -rv $wpa $netinst/config/wpa_supplicant.conf
+  echo "ifname=wlan0"           >> $netinst/raspberrypi-ua-netinst/config/installer-config.txt
+  echo "drivers_to_load=8192cu" >> $netinst/raspberrypi-ua-netinst/config/installer-config.txt
+  cp -rv $wpa $netinst/raspberrypi-ua-netinst/config/wpa_supplicant.conf
 fi
 
 
@@ -85,7 +85,7 @@ echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 echo ""
 pushd $netinst/
   # change the hostname in the default installer-config.txt
-  sed -i "s/raspberrypi/${CLIENT}/" ./config/installer-config.txt
+  sed -i "s/raspberrypi/${CLIENT}/" ./raspberrypi-ua-netinst/config/installer-config.txt
   echo ""
   echo ""
   echo ""
