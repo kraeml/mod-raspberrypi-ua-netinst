@@ -1,0 +1,21 @@
+# Useful OS extensions
+packages="apt-utils,logrotate,raspi-copies-and-fills,rsync,lsb-release,nfs-common,f2fs-tools"
+
+# Handy utilities
+packages="$packages,bc,dieharder,git,htop,lsof,nano,psmisc,screen,stress,tree,curl,zip"
+
+# My defaults
+cmdline="dwc_otg.lpm_enable=0 console=tty1 noatime loglevel=2 cgroup_enable=memory elevator=noop"
+disable_root=1
+gpu_mem=16
+hostname=raspberrypi
+rootfstype=f2fs
+timeserver=2.pool.ntp.org
+timezone=Europe/Amsterdam
+username=pi
+userpw=raspberry
+user_is_admin=1
+locales="en_US.UTF-8"
+system_default_locale="en_US.UTF-8"
+
+boot_volume_label=$hostname
