@@ -1,10 +1,10 @@
 # mod-raspberrypi-ua-netinst
-Custom changes to `FooDeas\raspberrypi-ua-netinst`.
+Custom changes to `FooDeas/raspberrypi-ua-netinst`.
 
-Holds the custom files that I need to build my own image of `FooDeas\raspberrypi-ua-netinst`.
+Holds the custom files that I need to build my own image of `FooDeas/raspberrypi-ua-netinst`.
 
 Requirements:
-- A clone of the repository `FooDeas\raspberrypi-ua-netinst` is present in the
+- A clone of the repository `FooDeas/raspberrypi-ua-netinst` is present in the
 same directory as where this repository resides:
 
 ```
@@ -22,8 +22,8 @@ same directory as where this repository resides:
 ```
 
 ## Installing
-1. Clone `FooDeas\raspberrypi-ua-netinst`
-2. Clone `Mausy5043\mod-raspberrypi-ua-netinst`
+1. Clone `FooDeas/raspberrypi-ua-netinst`
+2. Clone `Mausy5043/mod-raspberrypi-ua-netinst`
 3. `echo "master" > pi-netinst.branch   # this defines the branch to be used`
 
 ## Usage
