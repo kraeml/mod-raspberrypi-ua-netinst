@@ -1,6 +1,6 @@
 # These are my default settings.
 # The order of the settings follows (as closely as possible) the description in
-# the **INSTALL_CUSTOM.md** documentation of rapsberrypi-ua-netinst repo.
+# the **INSTALL_CUSTOM.md** documentation of raspberrypi-ua-netinst repo.
 
 
 # >>> PACKAGES <<<
