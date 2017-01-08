@@ -8,10 +8,8 @@ Requirements:
 same directory as where this repository resides:
 
 ```
-  .
-  ..
   mod-raspberrypi-ua-netinst
-  netinst.branch
+  pi-netinst.branch
   raspberrypi-ua-netinst
 ```
 - The file `../pi-netinst.branch` contains the name of the branch to be used. E.g.:
