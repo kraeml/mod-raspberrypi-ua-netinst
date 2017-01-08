@@ -83,8 +83,7 @@ echo "  Set permissions..."
 chmod -R 0755 /rootfs/$USRHOME/raspboot
 
 # echo "Change ownership of files in $USRHOME..."
-# chroot /rootfs /bin/chown -R $USER:$USER /$USRHOME
-
+chroot /rootfs /bin/chown -R $USER:$USER /$USRHOME
 
 ######################
 #### SERVER SETUP ####
