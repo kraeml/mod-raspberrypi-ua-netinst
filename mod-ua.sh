@@ -75,6 +75,10 @@ if [ "$WIFI" == true ]; then
   cp -rv $wpa $netinst/config/wpa_supplicant.conf
 fi
 
+# try to fix build.sh
+fnd="\ config"
+rpl="\ \.\.\/config"
+sed -i "s/${fnd}/${rpl}/" $netinst/build.sh
 
 echo ""
 echo ""
