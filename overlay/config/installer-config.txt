@@ -6,7 +6,7 @@
 # >>> PACKAGES <<<
 ##################################
 
-packages="rsync,lsb-release,nfs-common,f2fs-tools,git,nano,tree,curl,zip"
+packages="bash-completion,rsync,lsb-release,nfs-common,f2fs-tools,git,nano,tree,curl,zip"
 # packages I need
 packages="$packages,bc,htop,lsof,psmisc,screen,stress"
 # packages I like
