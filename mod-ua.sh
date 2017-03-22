@@ -97,7 +97,7 @@ pushd $netinst/
   echo "*** Cleaning the installer ***********************"
   echo "**************************************************"
   echo ""
-  ./clean.sh
+  ./clean.sh || exit 1
 
   echo ""
   echo ""
@@ -106,7 +106,7 @@ pushd $netinst/
   echo "*** Updating the installer packages **************"
   echo "**************************************************"
   echo ""
-  ./update.sh
+  ./update.sh || exit 1
 
   echo ""
   echo ""
@@ -118,7 +118,7 @@ pushd $netinst/
   # We don't need the zip file
   sed -i 's/cd bootfs && zip/#not zipping#/' ./build.sh
   sed -i '/#not zipping#/{n;s/.*/#############/}' ./build.sh
-  ./build.sh
+  ./build.sh || exit 1
   # By default don't `./buildroot`
   #./buildroot.sh
 
