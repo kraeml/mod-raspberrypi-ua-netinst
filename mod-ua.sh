@@ -3,7 +3,7 @@
 WIFI=false
 CLIENT="raspberrypi"
 netinst="../raspberrypi-ua-netinst"
-branch="../pi-netinst.branch"
+BRANCH="../pi-netinst.branch"
 wpa="../wpa.conf"
 
 GOPTS=$(getopt -n 'mod-ua.sh' -o n:w --long name:,wifi -- "$@")
@@ -27,13 +27,13 @@ fi
 
 # Check if `pi-netinst.branch` file exists
 # This file contains the name of the branch that should be used.
-if [ ! -e $branch ]; then
-  echo "!!! Could not find $branch" >&2
+if [ ! -e $BRANCH ]; then
+  echo "!!! Could not find $BRANCH" >&2
   echo "    This file should contain the name of the branch to be used."
   echo "    Both the branchname of raspberrypi-ua-netinst and the branchname of mod-raspberrypi-ua-netinst must be the same."
   exit 1
 fi
-branch=$(cat $branch)
+BRANCH=$(cat $BRANCH)
 
 
 echo ""
@@ -42,7 +42,7 @@ echo ""
 echo "Settings being used:"
 echo "Wi-fi=$WIFI"
 echo "Name=$CLIENT"
-echo "Branch=$branch"
+echo "Branch=$BRANCH"
 echo ""
 
 echo ""
@@ -55,8 +55,8 @@ echo ""
 pushd $netinst/
   git pull
   git fetch origin
-  git checkout "$branch"
-  git reset --hard "origin/$branch" && \
+  git checkout "$BRANCH"
+  git reset --hard "origin/$BRANCH" && \
   git clean -f -d
 popd
 
