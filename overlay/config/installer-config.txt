@@ -6,7 +6,7 @@
 # >>> PACKAGES <<<
 ##################################
 
-packages="rsync,lsb-release,nfs-common,f2fs-tools,git,nano,tree,curl,zip"
+packages="bash-completion,rsync,lsb-release,nfs-common,f2fs-tools,git,nano,tree,curl,zip"
 # packages I need
 packages="$packages,bc,htop,lsof,psmisc,screen,stress"
 # packages I like
@@ -83,7 +83,3 @@ cmdline="dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 noatime loglev
 # elevator changed to `noop` to increase performance
 
 timeserver=nl.pool.ntp.org
-
-hostname "netinst-"$hostname
-hostname
-

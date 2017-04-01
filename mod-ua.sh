@@ -2,9 +2,9 @@
 
 WIFI=false
 CLIENT="raspberrypi"
-netinst="../raspberrypi-ua-netinst"
-branch="../pi-netinst.branch"
-wpa="../wpa.conf"
+NETINST="../raspberrypi-ua-netinst"
+BRANCH="../pi-netinst.branch"
+WPA="../wpa.conf"
 
 GOPTS=$(getopt -n 'mod-ua.sh' -o n:w --long name:,wifi -- "$@")
 if [ $? != 0 ] ; then echo "!!! Failed parsing options." >&2 ; exit 1 ; fi
@@ -20,29 +20,29 @@ while true; do
 done
 
 # Check if the `raspberrypi-ua-netinst` directory is present.
-if [ ! -d $netinst ]; then
+if [ ! -d $NETINST ]; then
   echo "!!! A clone of raspberrypi-ua-netinst could not be found." >&2
   exit 1
 fi
 
 # Check if `pi-netinst.branch` file exists
 # This file contains the name of the branch that should be used.
-if [ ! -e $branch ]; then
-  echo "!!! Could not find $branch" >&2
+if [ ! -e $BRANCH ]; then
+  echo "!!! Could not find $BRANCH" >&2
   echo "    This file should contain the name of the branch to be used."
   echo "    Both the branchname of raspberrypi-ua-netinst and the branchname of mod-raspberrypi-ua-netinst must be the same."
   exit 1
 fi
-branch=$(cat $branch)
+BRANCH=$(cat $BRANCH)
 
 
 echo ""
 echo ""
 echo ""
 echo "Settings being used:"
-echo "Wi-fi : $WIFI"
-echo "Name  : $CLIENT"
-echo "Branch: $branch"
+echo "Wi-fi=$WIFI"
+echo "Name=$CLIENT"
+echo "Branch=$BRANCH"
 echo ""
 
 echo ""
@@ -52,11 +52,11 @@ echo "**************************************************"
 echo "*** Updating the RASPBERRYPI-UA-NETINST files ****"
 echo "**************************************************"
 echo ""
-pushd $netinst/
+pushd $NETINST/
   git pull
   git fetch origin
-  git checkout "$branch"
-  git reset --hard "origin/$branch" && \
+  git checkout "$BRANCH"
+  git reset --hard "origin/$BRANCH" && \
   git clean -f -d
 popd
 
@@ -67,18 +67,19 @@ echo "**************************************************"
 echo "*** Putting modifications in place ***************"
 echo "**************************************************"
 echo ""
-cp -rv ./overlay/* $netinst/
+cp -rv ./overlay/* $NETINST/
 if [ "$WIFI" == true ]; then
   echo "   ...adding wpa_supplicant.conf to installer!"
-  echo "ifname=wlan0"           >> $netinst/config/installer-config.txt
-  echo "drivers_to_load=8192cu" >> $netinst/config/installer-config.txt
-  cp -rv $wpa $netinst/config/wpa_supplicant.conf
+  echo "ifname=wlan0"           >> $NETINST/config/installer-config.txt
+  echo "drivers_to_load=8192cu" >> $NETINST/config/installer-config.txt
+  cp -rv $WPA $NETINST/config/wpa_supplicant.conf
 fi
 
 # try to fix build.sh
+
 fnd="\ config"
 rpl="\ \.\.\/config"
-sed -i "s/${fnd}/${rpl}/" $netinst/build.sh
+sed -i "s/${fnd}/${rpl}/" $NETINST/build.sh
 
 echo ""
 echo ""
@@ -87,7 +88,7 @@ echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 echo "@@@ Building RASPBERRYPI-UA-NETINST image @@@@@@@@"
 echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 echo ""
-pushd $netinst/
+pushd $NETINST/
   # change the hostname in the default installer-config.txt
   sed -i "s/raspberrypi/${CLIENT}/" ./config/installer-config.txt
   echo ""
@@ -97,7 +98,7 @@ pushd $netinst/
   echo "*** Cleaning the installer ***********************"
   echo "**************************************************"
   echo ""
-  ./clean.sh
+  ./clean.sh || exit 1
 
   echo ""
   echo ""
@@ -106,7 +107,7 @@ pushd $netinst/
   echo "*** Updating the installer packages **************"
   echo "**************************************************"
   echo ""
-  ./update.sh
+  ./update.sh || exit 1
 
   echo ""
   echo ""
@@ -118,7 +119,7 @@ pushd $netinst/
   # We don't need the zip file
   sed -i 's/cd bootfs && zip/#not zipping#/' ./build.sh
   sed -i '/#not zipping#/{n;s/.*/#############/}' ./build.sh
-  ./build.sh
+  ./build.sh || exit 1
   # By default don't `./buildroot`
   #./buildroot.sh
 
