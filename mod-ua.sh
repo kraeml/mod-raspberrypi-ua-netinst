@@ -2,9 +2,9 @@
 
 WIFI=false
 CLIENT="raspberrypi"
-netinst="../raspberrypi-ua-netinst"
+NETINST="../raspberrypi-ua-netinst"
 BRANCH="../pi-netinst.branch"
-wpa="../wpa.conf"
+WPA="../wpa.conf"
 
 GOPTS=$(getopt -n 'mod-ua.sh' -o n:w --long name:,wifi -- "$@")
 if [ $? != 0 ] ; then echo "!!! Failed parsing options." >&2 ; exit 1 ; fi
@@ -20,7 +20,7 @@ while true; do
 done
 
 # Check if the `raspberrypi-ua-netinst` directory is present.
-if [ ! -d $netinst ]; then
+if [ ! -d $NETINST ]; then
   echo "!!! A clone of raspberrypi-ua-netinst could not be found." >&2
   exit 1
 fi
@@ -52,7 +52,7 @@ echo "**************************************************"
 echo "*** Updating the RASPBERRYPI-UA-NETINST files ****"
 echo "**************************************************"
 echo ""
-pushd $netinst/
+pushd $NETINST/
   git pull
   git fetch origin
   git checkout "$BRANCH"
@@ -67,18 +67,19 @@ echo "**************************************************"
 echo "*** Putting modifications in place ***************"
 echo "**************************************************"
 echo ""
-cp -rv ./overlay/* $netinst/
+cp -rv ./overlay/* $NETINST/
 if [ "$WIFI" == true ]; then
   echo "   ...adding wpa_supplicant.conf to installer!"
-  echo "ifname=wlan0"           >> $netinst/config/installer-config.txt
-  echo "drivers_to_load=8192cu" >> $netinst/config/installer-config.txt
-  cp -rv $wpa $netinst/config/wpa_supplicant.conf
+  echo "ifname=wlan0"           >> $NETINST/config/installer-config.txt
+  echo "drivers_to_load=8192cu" >> $NETINST/config/installer-config.txt
+  cp -rv $WPA $NETINST/config/wpa_supplicant.conf
 fi
 
 # try to fix build.sh
+
 fnd="\ config"
 rpl="\ \.\.\/config"
-sed -i "s/${fnd}/${rpl}/" $netinst/build.sh
+sed -i "s/${fnd}/${rpl}/" $NETINST/build.sh
 
 echo ""
 echo ""
@@ -87,7 +88,7 @@ echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 echo "@@@ Building RASPBERRYPI-UA-NETINST image @@@@@@@@"
 echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 echo ""
-pushd $netinst/
+pushd $NETINST/
   # change the hostname in the default installer-config.txt
   sed -i "s/raspberrypi/${CLIENT}/" ./config/installer-config.txt
   echo ""
