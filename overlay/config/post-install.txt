@@ -43,9 +43,11 @@ mkdir -p /rootfs/mnt/share1
 mkdir -p /rootfs/mnt/backup
 mkdir -p /rootfs/home/pi/bin
 
-
+# disable default /tmp mount
+sed -i "s/tmpfs \/tmp/#&/" rootfs/opt/raspberrypi-ua-netinst/install.sh
 echo "" >> /rootfs/etc/fstab
 echo "# Added by post-install:" >> /rootfs/etc/fstab
+# use our own /tmp mount definition
 echo "tmpfs /tmp tmpfs defaults,nodev,nosuid,size=80% 0 0" >> /rootfs/etc/fstab
 echo "boson.lan:/srv/array1/backup    /mnt/backup nfs4 nouser,atime,rw,dev,exec,suid,intr,_netdev,noauto 0   0" >> /rootfs/etc/fstab
 echo "boson.lan:/srv/array1/rbin/rpi  /home/pi/bin nfs4 nouser,atime,rw,dev,exec,suid,intr,_netdev,x-systemd.automount,noauto  0   0" >> /rootfs/etc/fstab
