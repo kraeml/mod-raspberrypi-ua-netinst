@@ -43,7 +43,6 @@ mkdir -p /rootfs/mnt/share1
 mkdir -p /rootfs/mnt/backup
 mkdir -p /rootfs/home/pi/bin
 
-
 # disable default /tmp mount
 sed -i "s/tmpfs \/tmp/#&/" rootfs/opt/raspberrypi-ua-netinst/install.sh
 echo "" >> /rootfs/etc/fstab
