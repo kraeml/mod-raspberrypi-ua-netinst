@@ -2,7 +2,7 @@
 Holds the custom files that I need to build my own image of `FooDeas/raspberrypi-ua-netinst`.
 
 ## Functionality
-This repository allows me to build a custom version of the `FooDeas/raspberrypi-ua-netinst` installer without the need of a separate branch of that repo. I just `clone` the installer repo locally together with a clone of this mod-repo. This application then takes care that any custom changes that I need are inserted into the installer whereever I need them.
+This repository allows me to build a custom version of the `FooDeas/raspberrypi-ua-netinst` installer without the need of having to maintain a separate branch of that repo. I just `clone` the installer repo locally together with a clone of this mod-repo. This application then takes care that any custom changes that I need are inserted into the installer wherever I need them.
 
 ## Requirements:
 - A clone of the repository `FooDeas/raspberrypi-ua-netinst` is present in the
