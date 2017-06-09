@@ -44,7 +44,7 @@ mkdir -p /rootfs/mnt/backup
 mkdir -p /rootfs/home/pi/bin
 
 # disable default /tmp mount
-sed -i "s/tmpfs \/tmp/#&/" rootfs/etc/fstab
+sed -i "s/tmpfs \/tmp/#&/" /rootfs/etc/fstab
 echo "" >> /rootfs/etc/fstab
 echo "# Added by post-install:" >> /rootfs/etc/fstab
 # use our own /tmp mount definition
