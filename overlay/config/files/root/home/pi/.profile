@@ -21,6 +21,6 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-PATH="/usr/local/sbin:/usr/sbin:/sbin:$PATH"
+# PATH="/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 
-archey-m.py
+# archey-m.py
