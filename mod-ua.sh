@@ -117,8 +117,8 @@ pushd $NETINST/
   echo "**************************************************"
   echo ""
   # We don't need the zip file
-  sed -i 's/cd bootfs && zip/#not zipping#/' ./build.sh
-  sed -i '/#not zipping#/{n;s/.*/#############/}' ./build.sh
+  # sed -i 's/cd bootfs && zip/#not zipping#/' ./build.sh
+  # sed -i '/#not zipping#/{n;s/.*/#############/}' ./build.sh
   ./build.sh || exit 1
   # By default don't `./buildroot`
   #./buildroot.sh
