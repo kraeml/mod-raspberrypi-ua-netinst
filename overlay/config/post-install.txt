@@ -39,8 +39,8 @@ echo "ff02::1         ip6-allnodes"     >> /rootfs/etc/hosts
 echo "ff02::2         ip6-allrouters"   >> /rootfs/etc/hosts
 
 echo "Creating extra mountpoints..."
-mkdir -p /rootfs/mnt/share1
-mkdir -p /rootfs/mnt/backup
+mkdir -p /rootfs/media/share1
+mkdir -p /rootfs/media/backup
 mkdir -p /rootfs/home/pi/bin
 
 # disable default /tmp mount
@@ -49,8 +49,8 @@ echo "" >> /rootfs/etc/fstab
 echo "# Added by post-install:" >> /rootfs/etc/fstab
 # use our own /tmp mount definition
 echo "tmpfs /tmp tmpfs defaults,nodev,nosuid,size=80% 0 0" >> /rootfs/etc/fstab
-echo "boson.lan:/srv/array1/backup    /mnt/backup nfs4 nouser,atime,rw,dev,exec,suid,intr,_netdev,noauto 0   0" >> /rootfs/etc/fstab
-echo "boson.lan:/srv/array1/rbin/rpi  /home/pi/bin nfs4 nouser,atime,rw,dev,exec,suid,intr,_netdev,x-systemd.automount,noauto  0   0" >> /rootfs/etc/fstab
+#echo "boson.lan:/srv/array1/backup    /media/backup nfs4 nouser,atime,rw,dev,exec,suid,intr,_netdev,noauto 0   0" >> /rootfs/etc/fstab
+#echo "boson.lan:/srv/array1/rbin/rpi  /home/pi/bin nfs4 nouser,atime,rw,dev,exec,suid,intr,_netdev,x-systemd.automount,noauto  0   0" >> /rootfs/etc/fstab
 
 echo "."
 
@@ -68,13 +68,13 @@ if [ ! -d /rootfs/$USRHOME/.ssh ]; then
 fi
 
 # GIT
-echo "Set-up raspboot..."
-mkdir -p /rootfs/$USRHOME/raspboot
+echo "Set-up raspberry-edu-devops..."
+mkdir -p /rootfs/$USRHOME/.raspberry-edu-devops
 echo "  Pull sources from github..."
-chroot /rootfs /usr/bin/git clone -b master https://github.com/Mausy5043/raspboot.git /$USRHOME/raspboot
-echo "master" > /rootfs/$USRHOME/.raspboot.branch
+chroot /rootfs /usr/bin/git clone -b master https://kraeml@gitlab.com/kraeml/raspberry-edu-devops.git /$USRHOME/.raspberry-edu-devops
+echo "master" > /rootfs/$USRHOME/.raspberry-edu-devops.branch
 echo "  Set permissions..."
-chmod -R 0755 /rootfs/$USRHOME/raspboot
+chmod -R 0755 /rootfs/$USRHOME/.raspberry-edu-devops
 
 # echo "Change ownership of files in $USRHOME..."
 chroot /rootfs /bin/chown -R $USER:$USER /$USRHOME
