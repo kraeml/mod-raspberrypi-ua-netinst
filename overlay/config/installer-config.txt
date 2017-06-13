@@ -6,9 +6,9 @@
 # >>> PACKAGES <<<
 ##################################
 
-packages="bash-completion,rsync,lsb-release,nfs-common,f2fs-tools,git,nano,tree,curl,zip"
+packages="bash-completion,rsync,lsb-release,nfs-common,f2fs-tools,git,vim,tree,curl,zip,apt-transport-https"
 # packages I need
-packages="$packages,bc,htop,lsof,psmisc,screen,stress"
+packages="$packages,bc,htop,lsof,psmisc,screen,stress,nano,python-minimal,debian-archive-keyring,ca-certificates,tmux,pandoc,stow,tree"
 # packages I like
 
 firmware_packages=1
@@ -17,7 +17,12 @@ firmware_packages=1
 
 # >>> Device / Peripheral <<<
 ##################################
-
+i2c_enable=1
+spi_enable=1
+sound_enable=1
+camera_enable=1
+gpu_mem=16
+enable_watchdog=1
 
 # >>> SSH <<<
 ##################################
@@ -46,16 +51,19 @@ user_is_admin=1
 
 hostname=raspberrypi
 # This is a placeholder name. It will be replaced by the mod-raspberrypi-ua-netinst script.
-domainname=lan
+domainname=rdf.loc
 # this is my default local domainname
-
+wlan_country="DE"
+wlan_ssid="gateway"
+wlan_psk="SECRET"
 
 # >>> Localisation <<<
 ##################################
 
-timezone=Europe/Amsterdam
-locales="en_US.UTF-8"
-system_default_locale="en_US.UTF-8"
+timezone=Europe/Berlin
+locales="de_DE.UTF-8, en_US.UTF-8"
+system_default_locale="de_DE.UTF-8"
+keyboard_layout="de"
 
 
 # >>> Graphics/GPU
@@ -70,6 +78,7 @@ gpu_mem=16
 
 rootfstype=f2fs
 # F2FS is better suited for use on SD
+usbroot=1
 boot_volume_label=$hostname
 
 
@@ -82,4 +91,4 @@ cmdline="dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 noatime loglev
 # `cgroup_enable=memory` added to enable notification of upcoming OOM events
 # elevator changed to `noop` to increase performance
 
-timeserver=nl.pool.ntp.org
+timeserver=de.pool.ntp.org
