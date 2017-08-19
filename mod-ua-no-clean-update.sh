@@ -84,7 +84,7 @@ sed -i "s/\.zip/-${CLIENT}\.zip/" $NETINST/build.sh
 
 echo ""
 echo ""
-echo ""
+echo # ""
 echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 echo "@@@ Building RASPBERRYPI-UA-NETINST image @@@@@@@@"
 echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
@@ -92,23 +92,23 @@ echo ""
 pushd $NETINST/
   # change the hostname in the default installer-config.txt
   sed -i "s/raspberrypi/${CLIENT}/" ./config/installer-config.txt
-  echo ""
-  echo ""
-  echo ""
-  echo "**************************************************"
-  echo "*** Cleaning the installer ***********************"
-  echo "**************************************************"
-  echo ""
-  ./clean.sh || exit 1
+  # echo ""
+  # echo ""
+  # echo ""
+  # echo "**************************************************"
+  # echo "*** Cleaning the installer ***********************"
+  # echo "**************************************************"
+  # echo ""
+  # ./clean.sh || exit 1
 
-  echo ""
-  echo ""
-  echo ""
-  echo "**************************************************"
-  echo "*** Updating the installer packages **************"
-  echo "**************************************************"
-  echo ""
-  ./update.sh || exit 1
+  # echo ""
+  # echo ""
+  # echo ""
+  # echo "**************************************************"
+  # echo "*** Updating the installer packages **************"
+  # echo "**************************************************"
+  # echo ""
+  # ./update.sh || exit 1
 
   echo ""
   echo ""

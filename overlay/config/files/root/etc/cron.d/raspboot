@@ -1,5 +1,6 @@
 # m h dom mon dow user  command
 # Execute this command every minute during the first boot.
 # (@reboot doesn't work on the very first boot)
-# `raspboot` will replace this file with an @reboot job.
-*/1 *   * * *   pi      /home/pi/raspboot/00-run-scripts.sh 2>/home/pi/raspboot.log 1>&2
+# ToDo `raspberry-edu-devops` will replace this file with an @reboot job.
+# @reboot may not work fine.
+*/1 *   * * *   pi      /home/pi/.raspberry-edu-devops/install_jns_medium.sh 2>>/home/pi/.raspberry-edu-devops.log 1>&2
