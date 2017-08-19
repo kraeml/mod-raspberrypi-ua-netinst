@@ -80,6 +80,7 @@ fi
 fnd="\ config"
 rpl="\ \.\.\/config"
 sed -i "s/${fnd}/${rpl}/" $NETINST/build.sh
+sed -i "s/\.zip/-${CLIENT}\.zip/" $NETINST/build.sh
 
 echo ""
 echo ""
