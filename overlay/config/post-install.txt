@@ -12,6 +12,7 @@
 USER=$username
 USRHOME="home/"$USER
 RMTPATH=$hostname/$USRHOME
+USRLOG="/var/log/"$USER
 
 
 ######################
@@ -41,7 +42,15 @@ echo "ff02::2         ip6-allrouters"   >> /rootfs/etc/hosts
 echo "Creating extra mountpoints..."
 mkdir -p /rootfs/media/share1
 mkdir -p /rootfs/media/backup
-mkdir -p /rootfs/home/pi/bin
+
+
+echo "Creating extra log directory"
+mkdir -p "/rootfs/"$USRLOG
+chroot /rootfs /bin/chown -R $USER:$USER $USRLOG
+
+echo "Creating extra user bin directory"
+mkdir -p "/rootfs/"$USRHOME"/bin"
+chroot /rootfs /bin/chown -R $USER:$USER $USRHOME"/bin"
 
 # disable default /tmp mount
 sed -i "s/tmpfs \/tmp/#&/" /rootfs/etc/fstab
@@ -74,7 +83,8 @@ echo "  Pull sources from github..."
 chroot /rootfs /usr/bin/git clone -b master https://kraeml@gitlab.com/kraeml/raspberry-edu-devops.git /$USRHOME/.raspberry-edu-devops
 echo "master" > /rootfs/$USRHOME/.raspberry-edu-devops.branch
 echo "  Set permissions..."
-chmod -R 0755 /rootfs/$USRHOME/.raspberry-edu-devops
+# chroot /rootfs /bin/chown -R $USER:$USER $USRHOME/.raspberry-edu-devops
+# chmod -R 0755 /rootfs/$USRHOME/.raspberry-edu-devops
 
 # echo "Change ownership of files in $USRHOME..."
 chroot /rootfs /bin/chown -R $USER:$USER /$USRHOME
@@ -92,12 +102,12 @@ chroot /rootfs /usr/sbin/update-rc.d switch_cpu_governor defaults
 #### FINALISING ####
 ####################
 
-echo -n "********** SYSTEM READY **********"
+echo "********** SYSTEM READY **********"
 
 date
 # put the logfile somewhere we can find it, so we can mount /var/log with tmpfs
 sync; sync
-LOGTARGET=$USRHOME/installer.log
-cp $LOGFILE /rootfs/$LOGTARGET
-chmod 0644  /rootfs/$LOGTARGET
-chroot /rootfs /bin/chown $USER:$USER /$LOGTARGET
+# LOGTARGET=$USRHOME/installer.log
+# cp $LOGFILE /rootfs/$LOGTARGET
+# chmod 0644  /rootfs/$LOGTARGET
+# chroot /rootfs /bin/chown $USER:$USER /$LOGTARGET
