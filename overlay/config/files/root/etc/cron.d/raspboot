@@ -2,4 +2,4 @@
 # Execute this command every minute during the first boot.
 # (@reboot doesn't work on the very first boot)
 # m h dom mon dow user  command
-*/1 * * * * pi /bin/bash --login /home/pi/.raspberry-edu-devops/install_jns_medium.sh 2>>/home/pi/.raspberry-edu-devops.log 1>&2
+*/1 * * * * pi flock -xn /home/pi/.forever.lck -c "/bin/bash --login /home/pi/.raspberry-edu-devops/install_jns_medium.sh 2>>/home/pi/.raspberry-edu-devops.log 1>&2"

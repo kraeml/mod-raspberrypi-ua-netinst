@@ -9,7 +9,7 @@
 # >>> PACKAGES <<<
 ##################################
 
-packages="bash-completion,rsync,lsb-release,lsb-core,nfs-common,f2fs-tools,git,vim,tree,curl,zip,apt-transport-https"
+packages="bash-completion,rsync,lsb-release,lsb-core,nfs-common,f2fs-tools,git,vim,tree,curl,zip,apt-transport-https,avahi-utils,avahi-daemon"
 # packages I need
 packages="$packages,bc,htop,lsof,psmisc,screen,stress,nano,python-minimal,debian-archive-keyring,ca-certificates,tmux,pandoc,stow,tree,dphys-swapfile"
 # packages I like
