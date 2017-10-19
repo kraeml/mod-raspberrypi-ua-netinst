@@ -2,11 +2,14 @@
 # The order of the settings follows (as closely as possible) the description in
 # the **INSTALL_CUSTOM.md** documentation of raspberrypi-ua-netinst repo.
 
+# >>> RELEASE <<<
+##################################
+
 
 # >>> PACKAGES <<<
 ##################################
 
-packages="bash-completion,rsync,lsb-release,lsb-core,nfs-common,f2fs-tools,git,vim,tree,curl,zip,apt-transport-https"
+packages="bash-completion,rsync,lsb-release,lsb-core,nfs-common,f2fs-tools,git,vim,tree,curl,zip,apt-transport-https,avahi-utils,avahi-daemon"
 # packages I need
 packages="$packages,bc,htop,lsof,psmisc,screen,stress,nano,python-minimal,debian-archive-keyring,ca-certificates,tmux,pandoc,stow,tree,dphys-swapfile"
 # packages I like
@@ -14,13 +17,15 @@ packages="$packages,bc,htop,lsof,psmisc,screen,stress,nano,python-minimal,debian
 firmware_packages=1
 # install the firmware packages just-in-case I need them for a WiFi-dongle
 
+# release=stretch
+# which release jessie or stretch not working on Aug 2017
 
 # >>> Device / Peripheral <<<
 ##################################
 i2c_enable=1
 spi_enable=1
 sound_enable=1
-camera_enable=1
+camera_enable=0
 gpu_mem=16
 enable_watchdog=1
 
@@ -78,7 +83,7 @@ gpu_mem=16
 
 rootfstype=f2fs
 # F2FS is better suited for use on SD
-usbroot=1
+#usbroot=1
 boot_volume_label=$hostname
 
 
