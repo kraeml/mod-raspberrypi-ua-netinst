@@ -5,7 +5,6 @@
 # >>> RELEASE <<<
 ##################################
 
-
 # >>> PACKAGES <<<
 ##################################
 
@@ -32,12 +31,11 @@ enable_watchdog=1
 # >>> SSH <<<
 ##################################
 
-ssh_pwlogin=1
 # the following is a deprecated option:
-disable_root=1
+# disable_root=1
 root_ssh_pwlogin=0
 # for security reasons we don't enable root, but we do enable SSH logins
-
+ssh_pwlogin=1
 
 # >>> User <<<
 ##################################
@@ -47,17 +45,17 @@ userpw=raspberry
 usergpu=1
 usergpio=1
 usersysgroups="adm,users,video,dialout"
-user_is_admin=1
+# the following is a deprecated option:
+# user_is_admin=1
+userperms_admin=1
 # set-up the default user
-
+userperms_sound=1
 
 # >>> Network <<<
 ##################################
 
 hostname=raspberrypi
 # This is a placeholder name. It will be replaced by the mod-raspberrypi-ua-netinst script.
-domainname=rdf.loc
-# this is my default local domainname
 wlan_country="DE"
 wlan_ssid="gateway"
 wlan_psk="SECRET"
@@ -95,5 +93,9 @@ cmdline="dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 noatime loglev
 # `loglevel=6` to increase logging during boot
 # `cgroup_enable=memory` added to enable notification of upcoming OOM events
 # elevator changed to `noop` to increase performance
+disable_raspberries=0
+# don't show the raspberry logo
+cleanup=1
+# Remove installer files after success.
 
 timeserver=de.pool.ntp.org
